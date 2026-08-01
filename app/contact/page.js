@@ -1,6 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import PageHero from "../../components/PageHero";
+import FadeIn from "../../components/FadeIn";
+import BookCallWidget from "../../components/BookCallWidget";
+
+const inputClass =
+  "rounded-lg border border-surface-line bg-white px-3.5 py-3 text-sm text-ink-900 transition-colors focus:border-brand-500 focus:outline-none";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -20,88 +27,107 @@ export default function Contact() {
 
   return (
     <>
-      <section className="page-hero">
-        <div className="wrap">
-          <span className="hero-eyebrow">Contact</span>
-          <h1>Request an inspection.</h1>
-          <p>
-            Tell us about the property and we'll follow up to schedule a
-            walkthrough, usually within a week.
-          </p>
-        </div>
-      </section>
+      <PageHero eyebrow="Contact" title="Have a question, or a property that doesn't fit the usual mold?">
+        Book a free 15-minute call below, or send a general question with the
+        form. If you&rsquo;re ready for a package recommendation and a quote,
+        the{" "}
+        <Link href="/get-started" className="font-semibold text-brand-400 hover:text-brand-300">
+          Get Started
+        </Link>{" "}
+        flow is faster.
+      </PageHero>
 
-      <section className="section">
+      <section className="bg-white py-16 md:py-20">
         <div className="wrap">
-          <div className="contact-grid">
-            <div className="contact-info">
-              <div className="info-row">
-                <div>
-                  <span className="label">Email</span>
-                  <a href="mailto:hello@charredguard.com">hello@charredguard.com</a>
-                </div>
-              </div>
-              <div className="info-row">
-                <div>
-                  <span className="label">Phone</span>
-                  <a href="tel:+18005550123">(800) 555-0123</a>
-                </div>
-              </div>
-              <div className="info-row">
-                <div>
-                  <span className="label">Service area</span>
-                  <p>Statewide, focused on Fire Hazard Severity Zones.</p>
-                </div>
-              </div>
-              <div className="info-row">
-                <div>
-                  <span className="label">Response time</span>
-                  <p>Within 1 business day.</p>
-                </div>
-              </div>
+          <FadeIn delay={0}>
+            <div className="mb-16 md:mb-20">
+              <span className="mb-2 block font-mono text-xs uppercase tracking-wide text-brand-600">
+                Talk it through first
+              </span>
+              <h2 className="mb-4 text-2xl font-extrabold text-ink-900">
+                Book a free 15-minute call
+              </h2>
+              <p className="mb-6 max-w-[60ch] text-sm text-ink-600">
+                We don&rsquo;t take cold calls, but we&rsquo;re happy to talk — pick a time
+                that works and we&rsquo;ll call you.
+              </p>
+              <BookCallWidget />
             </div>
+          </FadeIn>
 
-            <div>
-              {submitted ? (
-                <div className="form-success">
-                  <h3>Request received</h3>
-                  <p>
-                    Thanks, that's in. We'll reach out within one business
-                    day to schedule your inspection.
-                  </p>
+          <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[1fr_1.3fr] md:gap-12">
+            <FadeIn delay={0}>
+              <div>
+                <div className="mb-6 flex gap-3.5">
+                  <div>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Email</span>
+                    <a href="mailto:hello@charredguard.com" className="text-ink-900 no-underline hover:text-brand-600">
+                      hello@charredguard.com
+                    </a>
+                  </div>
                 </div>
-              ) : (
-                <form className="form-card" onSubmit={handleSubmit}>
-                  <div className="form-grid">
-                    <div className="field">
-                      <label htmlFor="name">Full name</label>
-                      <input id="name" name="name" type="text" required />
-                    </div>
-                    <div className="field">
-                      <label htmlFor="email">Email</label>
-                      <input id="email" name="email" type="email" required />
-                    </div>
-                    <div className="field">
-                      <label htmlFor="phone">Phone</label>
-                      <input id="phone" name="phone" type="tel" />
-                    </div>
-                    <div className="field">
-                      <label htmlFor="address">Property address</label>
-                      <input id="address" name="address" type="text" required />
-                    </div>
-                    <div className="field full">
-                      <label htmlFor="message">Anything we should know?</label>
-                      <textarea id="message" name="message" rows={4} />
-                    </div>
+                <div className="mb-6 flex gap-3.5">
+                  <div>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Service area</span>
+                    <p className="text-sm text-ink-600">Statewide, focused on Fire Hazard Severity Zones.</p>
                   </div>
-                  <div style={{ marginTop: 22 }}>
-                    <button type="submit" className="btn btn-primary" disabled={loading}>
-                      {loading ? "Sending…" : "Send Request"}
-                    </button>
+                </div>
+                <div className="flex gap-3.5">
+                  <div>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Response time</span>
+                    <p className="text-sm text-ink-600">Within 1 business day.</p>
                   </div>
-                </form>
-              )}
-            </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={100}>
+              <div>
+                {submitted ? (
+                  <div className="rounded-xl border-2 border-emerald-500 bg-white p-8 text-center">
+                    <h3 className="text-lg font-bold text-emerald-600">Request received</h3>
+                    <p className="mt-2 text-sm text-ink-600">
+                      Thanks, that&rsquo;s in. We&rsquo;ll reach out within one business
+                      day to schedule your inspection.
+                    </p>
+                  </div>
+                ) : (
+                  <form className="rounded-2xl border border-surface-line bg-white p-10 shadow-sm" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="name" className="text-sm font-semibold text-ink-900">Full name</label>
+                        <input id="name" name="name" type="text" required className={inputClass} />
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="email" className="text-sm font-semibold text-ink-900">Email</label>
+                        <input id="email" name="email" type="email" required className={inputClass} />
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="phone" className="text-sm font-semibold text-ink-900">Phone</label>
+                        <input id="phone" name="phone" type="tel" className={inputClass} />
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <label htmlFor="address" className="text-sm font-semibold text-ink-900">Property address</label>
+                        <input id="address" name="address" type="text" required className={inputClass} />
+                      </div>
+                      <div className="flex flex-col gap-1.5 md:col-span-2">
+                        <label htmlFor="message" className="text-sm font-semibold text-ink-900">Anything we should know?</label>
+                        <textarea id="message" name="message" rows={4} className={inputClass} />
+                      </div>
+                    </div>
+                    <div className="mt-5">
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="inline-flex h-11 items-center justify-center rounded-lg bg-brand-500 px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-600 disabled:pointer-events-none disabled:opacity-50"
+                      >
+                        {loading ? "Sending…" : "Send Request"}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>

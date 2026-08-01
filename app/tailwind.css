@@ -1,0 +1,6 @@
+/* New Tailwind layer for the design-system overhaul. Kept separate from
+   globals.css so pages that haven't migrated yet are unaffected. Preflight
+   is disabled in tailwind.config.js for the same reason. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

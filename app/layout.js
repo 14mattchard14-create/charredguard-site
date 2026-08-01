@@ -1,5 +1,6 @@
 import { Archivo, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "./tailwind.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
