@@ -13,7 +13,7 @@ import { CAL_COM_BOOKING_URL } from "../lib/calcom";
 // Cal.com's default full-width booker.
 // Falls back to a plain email prompt if the link isn't configured yet, so
 // the site never ships a broken booking box while Cal.com is being set up.
-export default function BookCallWidget({ height = 480 }) {
+export default function BookCallWidget({ height = 440 }) {
   const elementId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const calLink = CAL_COM_BOOKING_URL
     ? CAL_COM_BOOKING_URL.replace(/^https?:\/\/(www\.)?cal\.com\//, "").replace(/^\/+|\/+$/g, "")
@@ -57,10 +57,18 @@ export default function BookCallWidget({ height = 480 }) {
 
     window.Cal("init", { origin: "https://cal.com" });
 
+    // `theme` and `layout` must be nested under `config` on the "inline"
+    // call itself (this is how Cal.com's own embed-code generator emits it) —
+    // passing them as top-level keys is silently ignored, which is why the
+    // widget was rendering with Cal.com's default dark, full-size layout
+    // regardless of the later "ui" call.
     window.Cal("inline", {
       elementOrSelector: `#${elementId}`,
       calLink,
-      layout: "month_view",
+      config: {
+        theme: "light",
+        layout: "month_view",
+      },
     });
 
     window.Cal("ui", {
@@ -88,7 +96,7 @@ export default function BookCallWidget({ height = 480 }) {
   return (
     <div
       id={elementId}
-      className="w-full max-w-sm overflow-auto rounded-xl border border-surface-line bg-white"
+      className="w-full max-w-xs overflow-auto rounded-xl border border-surface-line bg-white"
       style={{ height }}
     />
   );
