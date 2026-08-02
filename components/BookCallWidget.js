@@ -13,10 +13,18 @@ import { CAL_COM_BOOKING_URL } from "../lib/calcom";
 // Cal.com's default full-width booker.
 // Falls back to a plain email prompt if the link isn't configured yet, so
 // the site never ships a broken booking box while Cal.com is being set up.
-export default function BookCallWidget({ height = 440 }) {
+//
+// `link` defaults to the 15-min intro call but can be overridden (e.g. with
+// CAL_COM_INSPECTION_URL) to reuse this same widget for the on-site
+// inspection booking step. `prefill` (name/email) carries contact info the
+// visitor already gave us into Cal.com's own name/email fields, and — for
+// the inspection booking specifically — makes the webhook's email-based
+// match back to their existing CRM lead more reliable.
+export default function BookCallWidget({ height = 440, link, prefill }) {
   const elementId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
-  const calLink = CAL_COM_BOOKING_URL
-    ? CAL_COM_BOOKING_URL.replace(/^https?:\/\/(www\.)?cal\.com\//, "").replace(/^\/+|\/+$/g, "")
+  const bookingUrl = link || CAL_COM_BOOKING_URL;
+  const calLink = bookingUrl
+    ? bookingUrl.replace(/^https?:\/\/(www\.)?cal\.com\//, "").replace(/^\/+|\/+$/g, "")
     : null;
 
   useEffect(() => {
@@ -68,6 +76,8 @@ export default function BookCallWidget({ height = 440 }) {
       config: {
         theme: "light",
         layout: "month_view",
+        ...(prefill?.name ? { name: prefill.name } : {}),
+        ...(prefill?.email ? { email: prefill.email } : {}),
       },
     });
 
@@ -76,7 +86,11 @@ export default function BookCallWidget({ height = 440 }) {
       hideEventTypeDetails: true,
       layout: "month_view",
     });
-  }, [calLink, elementId]);
+    // Only re-run if the link or prefill values actually change — prefill
+    // is a plain object literal from the caller, so compare its fields
+    // rather than the object reference.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [calLink, elementId, prefill?.name, prefill?.email]);
 
   if (!calLink) {
     return (

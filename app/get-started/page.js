@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import BookCallWidget from "../../components/BookCallWidget";
+import { CAL_COM_INSPECTION_URL } from "../../lib/calcom";
 import { getPaymentSummary, validatePaymentDetails } from "../../lib/payment.mjs";
 
 const PHASES = ["Goals", "Package & call", "Request", "Done"];
@@ -332,9 +333,29 @@ export default function GetStarted() {
             <p className="mx-auto mt-2 max-w-[42ch] text-sm text-ink-600">
               Thanks — we&rsquo;ll reach out within one business day to confirm your{" "}
               {PACKAGES[tier].name} assessment via {METHODS[method].name}
-              {consultChoice === "booked" ? " and your booked call" : ""}, and get
-              everything scheduled. {paymentMode === "payNow" ? "Your payment was accepted in this demo checkout." : "You can pay the deposit later once we confirm the appointment."}
+              {consultChoice === "booked" ? " and your booked call" : ""}
+              {method !== "onsite" ? ", and get everything scheduled." : "."}{" "}
+              {paymentMode === "payNow" ? "Your payment was accepted in this demo checkout." : "You can pay the deposit later once we confirm the appointment."}
             </p>
+
+            {method === "onsite" && (
+              <div className="mt-6 text-left">
+                <div className="rounded-xl border border-surface-line bg-surface-muted p-4">
+                  <p className="text-sm font-bold text-ink-900">Pick a time for your on-site inspection</p>
+                  <p className="mt-1 text-sm text-ink-600">
+                    Grab a slot below — no need to wait for us to reach out first.
+                  </p>
+                </div>
+                <div className="mt-3.5">
+                  <BookCallWidget
+                    height={480}
+                    link={CAL_COM_INSPECTION_URL}
+                    prefill={{ name: contact.name, email: contact.email }}
+                  />
+                </div>
+              </div>
+            )}
+
             <div className="mt-6">
               <Button asChild variant="outline">
                 <Link href="/">Back to home</Link>
