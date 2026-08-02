@@ -68,6 +68,8 @@ export default function GetStarted() {
   const [cardDetails, setCardDetails] = useState({ cardName: "", cardNumber: "", expiry: "", cvc: "" });
   const [paymentErrors, setPaymentErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [guidedInviteLink, setGuidedInviteLink] = useState(null);
 
   const phaseIndex = step <= 1 ? 0 : step === 2 ? 1 : step === 3 ? 2 : 3;
   const paymentSummary = getPaymentSummary({ tier: tier || "Base", method });
@@ -84,7 +86,7 @@ export default function GetStarted() {
     setStep(2);
   }
 
-  function handleRequestSubmit(e) {
+  async function handleRequestSubmit(e) {
     e.preventDefault();
     const validation = validatePaymentDetails({
       payNow: paymentMode === "payNow",
@@ -95,20 +97,51 @@ export default function GetStarted() {
     });
 
     setPaymentErrors(validation.errors);
+    setSubmitError(null);
 
     if (!validation.valid) {
       return;
     }
 
     setSubmitting(true);
-    // NOTE: this currently confirms locally, same as the /contact form.
-    // Wire this up to an email service (e.g. Resend, Formspree) or a real gateway
-    // such as Stripe once the backend exists — send address, goals, tier,
-    // method, consultChoice, payment mode, and contact info as one lead record.
+
+    // Guided Photo Assessment needs no scheduling on our end — create the
+    // property + homeowner invite right now and hand the customer their
+    // walkthrough link immediately (also emailed to them). On-Site
+    // Inspection still just confirms here; that property gets created by
+    // the Cal.com webhook once they actually pick a time on step 4.
+    if (method === "photo") {
+      try {
+        const res = await fetch("/api/guided-request", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            address,
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone,
+            leadNotes: `${PACKAGES[tier].name} package via ${METHODS[method].name}${
+              consultChoice === "booked" ? " + booked intro call" : ""
+            }, ${paymentMode === "payNow" ? "paid" : "pay later"}.`,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || "Could not start your guided assessment");
+        setGuidedInviteLink(data.inviteLink);
+      } catch (err) {
+        setSubmitting(false);
+        setSubmitError(err.message || "Something went wrong — please try again.");
+        return;
+      }
+    }
+
+    // NOTE: the rest of this (payment, non-photo lead capture) still
+    // confirms locally, same as the /contact form. Wire up to a real
+    // gateway such as Stripe once the backend exists.
     setTimeout(() => {
       setSubmitting(false);
       setStep(4);
-    }, 800);
+    }, 400);
   }
 
   return (
@@ -312,6 +345,9 @@ export default function GetStarted() {
                   />
                 </div>
               </div>
+              {submitError && (
+                <p className="mt-4 rounded-lg bg-red-50 px-3.5 py-2.5 text-sm text-red-700">{submitError}</p>
+              )}
               <div className="mt-5 flex items-center justify-between">
                 <button type="button" className="text-sm font-semibold text-ink-900 hover:underline" onClick={() => setStep(2)}>
                   &larr; Back
@@ -331,12 +367,45 @@ export default function GetStarted() {
             </div>
             <h2 className="text-2xl font-extrabold text-ink-900">Request received</h2>
             <p className="mx-auto mt-2 max-w-[42ch] text-sm text-ink-600">
-              Thanks — we&rsquo;ll reach out within one business day to confirm your{" "}
-              {PACKAGES[tier].name} assessment via {METHODS[method].name}
-              {consultChoice === "booked" ? " and your booked call" : ""}
-              {method !== "onsite" ? ", and get everything scheduled." : "."}{" "}
+              {method === "photo" ? (
+                <>
+                  Thanks — your {PACKAGES[tier].name} assessment via {METHODS[method].name} is
+                  ready to start
+                  {consultChoice === "booked" ? ", and your intro call is booked" : ""}.
+                </>
+              ) : (
+                <>
+                  Thanks — we&rsquo;ll reach out within one business day to confirm your{" "}
+                  {PACKAGES[tier].name} assessment via {METHODS[method].name}
+                  {consultChoice === "booked" ? " and your booked call" : ""}, usually within one
+                  business day.
+                </>
+              )}{" "}
               {paymentMode === "payNow" ? "Your payment was accepted in this demo checkout." : "You can pay the deposit later once we confirm the appointment."}
             </p>
+
+            {method === "photo" && guidedInviteLink && (
+              <div className="mt-6 text-left">
+                <div className="rounded-xl border border-surface-line bg-surface-muted p-4">
+                  <p className="text-sm font-bold text-ink-900">Start your guided walkthrough</p>
+                  <p className="mt-1 text-sm text-ink-600">
+                    We&rsquo;ve also emailed this link to {contact.email} — use it anytime, no
+                    scheduling needed.
+                  </p>
+                </div>
+                <div className="mt-3.5 flex flex-col gap-2 sm:flex-row">
+                  <input
+                    readOnly
+                    value={guidedInviteLink}
+                    onFocus={(e) => e.target.select()}
+                    className={`${inputClass} flex-1 font-mono text-xs`}
+                  />
+                  <Button asChild>
+                    <a href={guidedInviteLink}>Start now</a>
+                  </Button>
+                </div>
+              </div>
+            )}
 
             {method === "onsite" && (
               <div className="mt-6 text-left">
