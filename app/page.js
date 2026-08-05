@@ -102,9 +102,8 @@ export default function Home() {
               Wildfire Home Hardening Inspections
             </span>
             <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-5xl">
-              A clear, honest look at your home&rsquo;s{" "}
-              <span className="text-brand-400">wildfire risk</span>, whenever
-              you&rsquo;re ready.
+              Guard your home. Start with{" "}
+              <span className="text-brand-400">knowing your risk</span>.
             </h1>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-white/80">
               Charred Guard walks your property zone by zone against Wildfire
