@@ -162,7 +162,7 @@ export default function Home() {
             </FadeIn>
             <FadeIn delay={100}>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
-                Four zones, one report.
+                A full picture of your property, zone by zone.
               </h2>
             </FadeIn>
             <FadeIn delay={200}>
@@ -237,7 +237,7 @@ export default function Home() {
             </FadeIn>
             <FadeIn delay={100}>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
-                From walkthrough to action plan.
+                How your assessment becomes an action plan.
               </h2>
             </FadeIn>
             <FadeIn delay={200}>
