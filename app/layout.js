@@ -28,7 +28,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata = {
   title: "Charred Guard | Wildfire Home Hardening Inspections",
   description:
-    "Professional Wildfire Prepared Home inspections and defensible-space assessments. Know your risk zones before fire season does.",
+    "Wildfire Prepared Home inspections and defensible-space assessments, with clear reports you can act on at your own pace.",
   icons: {
     icon: [
       { url: "/icon-32.png", sizes: "32x32", type: "image/png" },

@@ -102,14 +102,15 @@ export default function Home() {
               Wildfire Home Hardening Inspections
             </span>
             <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-5xl">
-              Know your property&rsquo;s{" "}
-              <span className="text-brand-400">fire risk</span> before fire
-              season does.
+              A clear, honest look at your home&rsquo;s{" "}
+              <span className="text-brand-400">wildfire risk</span>, whenever
+              you&rsquo;re ready.
             </h1>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-white/80">
-              Charred Guard inspects your home zone by zone against Wildfire
-              Prepared Home standards, then gives you a clear, prioritized
-              report you can act on, or hand straight to your insurer.
+              Charred Guard walks your property zone by zone against Wildfire
+              Prepared Home standards, then hands you a clear, prioritized
+              report — ready to act on whenever works for you, or hand
+              straight to your insurer.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild>
@@ -269,12 +270,12 @@ export default function Home() {
               Where we work
             </span>
             <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">
-              Built for California&rsquo;s highest fire-risk terrain.
+              Serving property owners across California&rsquo;s fire country.
             </h2>
             <p className="mt-3 text-base leading-relaxed text-white/85">
               From coastal chaparral to Sierra foothill forest, every report is
               checked against the Fire Hazard Severity Zone your property
-              actually sits in.
+              actually sits in — not a generic checklist.
             </p>
           </FadeIn>
         </div>

@@ -16,8 +16,9 @@ export default function About() {
     <>
       <PageHero eyebrow="About" title="Built for property owners in fire country.">
         Charred Guard was started to give homeowners the same zone-by-zone
-        read on their fire risk that fire agencies use, in language that's
-        actually useful before a fire, not just after one.
+        read on their fire risk that fire agencies use — explained in plain
+        language, so you always know where things stand and what to do
+        next, on your own timeline.
       </PageHero>
 
       <section className="bg-white py-16 md:py-20">
