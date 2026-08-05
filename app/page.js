@@ -80,6 +80,10 @@ const faqs = [
     a: "You'll get a ranked list of what to fix first, with photo evidence for every finding. Once the work is done, we can also prepare a tailored follow-up report on a case-by-case basis — whether that's getting ready to apply for certification at wildfireprepared.org, or something formatted for your insurance provider.",
   },
   {
+    q: "I'm selling my home in a high fire-hazard zone — does this help?",
+    a: "It can. California's AB-38 law (Civil Code 1102.19) requires sellers in a High or Very High Fire Hazard Severity Zone to give buyers documentation of defensible space compliance before closing. We don't issue that official paperwork — only your local fire department can — but our assessment flags likely issues ahead of time, so you're not scrambling to fix things mid-escrow. Real estate agents are welcome to reach out too.",
+  },
+  {
     q: "Will this get me an insurance discount or official certification?",
     a: "Not automatically — both depend on your specific property and, for insurance, on your individual carrier. Our report shows exactly where your home stands against Wildfire Prepared Home criteria, but whether an insurer offers a discount is entirely their own policy, and official certification requires every required criterion to be met, verified separately by IBHS. Some properties qualify after one round of fixes; others need more work first. We'll tell you honestly where yours stands, either way.",
   },
@@ -228,6 +232,32 @@ export default function Home() {
       </section>
 
       <section className="bg-white py-16 md:py-20">
+        <div className="wrap">
+          <div className="mx-auto max-w-2xl text-center">
+            <FadeIn delay={0}>
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+                Insurance
+              </span>
+              <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
+                Insurance in fire country is complicated. We&rsquo;re here to help you navigate it.
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-ink-600">
+                More insurers are pulling back from high-risk areas, and
+                thousands of California homeowners have landed on the FAIR
+                Plan, the state&rsquo;s insurer of last resort. A documented,
+                criteria-based assessment gives you the kind of paperwork
+                carriers actually ask for — showing exactly where your
+                property stands today. It&rsquo;s not a guarantee of coverage
+                or a discount; that&rsquo;s always up to your individual
+                carrier. But walking in with real documentation puts you in a
+                stronger position than walking in with none.
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface-muted py-16 md:py-20">
         <div className="wrap">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <FadeIn delay={0}>

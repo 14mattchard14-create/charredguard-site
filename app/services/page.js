@@ -76,6 +76,16 @@ export default function Services() {
               </FadeIn>
             ))}
           </div>
+          <FadeIn delay={200}>
+            <div className="mt-6 rounded-lg bg-surface-muted p-3.5 text-sm leading-relaxed text-ink-600">
+              Selling in a High or Very High Fire Hazard Severity Zone?
+              California&rsquo;s AB-38 law requires proof of defensible space
+              compliance before closing. We don&rsquo;t issue that official
+              paperwork — your local fire department does — but an
+              assessment against these same categories can get you ready for
+              it well before escrow gets tight.
+            </div>
+          </FadeIn>
         </div>
       </section>
 

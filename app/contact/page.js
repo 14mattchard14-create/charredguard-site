@@ -72,10 +72,20 @@ export default function Contact() {
                     <p className="text-sm text-ink-600">Statewide, focused on Fire Hazard Severity Zones.</p>
                   </div>
                 </div>
-                <div className="flex gap-3.5">
+                <div className="mb-6 flex gap-3.5">
                   <div>
                     <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Response time</span>
                     <p className="text-sm text-ink-600">Within 1 business day.</p>
+                  </div>
+                </div>
+                <div className="flex gap-3.5">
+                  <div>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Real estate agents</span>
+                    <p className="text-sm text-ink-600">
+                      Working with clients in a high fire-hazard zone? Happy
+                      to help them get ahead of California&rsquo;s AB-38
+                      disclosure requirement — reach out anytime.
+                    </p>
                   </div>
                 </div>
               </div>
