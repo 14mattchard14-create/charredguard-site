@@ -14,7 +14,7 @@ function CheckIcon() {
 export default function About() {
   return (
     <>
-      <PageHero eyebrow="About" title="Built for property owners in fire country.">
+      <PageHero eyebrow="About" title="Built for property owners in Southern California's fire country.">
         Charred Guard was started to give homeowners the same zone-by-zone
         read on their fire risk that fire agencies use — explained in plain
         language, so you always know where things stand and what to do

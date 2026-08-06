@@ -299,12 +299,14 @@ export default function Home() {
               Where we work
             </span>
             <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">
-              Serving property owners across California&rsquo;s fire country.
+              Serving property owners across Southern California.
             </h2>
             <p className="mt-3 text-base leading-relaxed text-white/85">
-              From coastal chaparral to Sierra foothill forest, every report is
-              checked against the Fire Hazard Severity Zone your property
-              actually sits in — not a generic checklist.
+              From coastal chaparral to inland foothill canyons, every report
+              is checked against the Fire Hazard Severity Zone your property
+              actually sits in — not a generic checklist. We&rsquo;re based
+              in North San Diego County, with Orange County as another
+              primary service area.
             </p>
           </FadeIn>
         </div>
@@ -353,7 +355,7 @@ export default function Home() {
                 </div>
                 <span className="mb-1.5 block font-mono text-xs tracking-wide text-ink-600">ON-SITE</span>
                 <h3 className="text-lg font-bold text-ink-900">On-Site Inspection</h3>
-                <span className="mb-2 mt-1 block font-mono text-xl font-bold text-brand-600">From $450</span>
+                <span className="mb-2 mt-1 block font-mono text-xl font-bold text-brand-600">From $500</span>
                 <p className="text-sm leading-relaxed text-ink-600">
                   A full zone-by-zone walkthrough and written report,
                   covering every WPH category for your property.

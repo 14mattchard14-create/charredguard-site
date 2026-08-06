@@ -69,7 +69,7 @@ export default function Contact() {
                 <div className="mb-6 flex gap-3.5">
                   <div>
                     <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Service area</span>
-                    <p className="text-sm text-ink-600">Statewide, focused on Fire Hazard Severity Zones.</p>
+                    <p className="text-sm text-ink-600">Southern California, primarily North San Diego County and Orange County.</p>
                   </div>
                 </div>
                 <div className="mb-6 flex gap-3.5">

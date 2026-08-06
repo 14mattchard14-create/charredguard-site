@@ -28,7 +28,7 @@ const METHODS = {
   },
   onsite: {
     name: "On-Site Inspection",
-    price: 450,
+    price: 500,
     blurb: "A full in-person walkthrough, scheduled within about a week.",
   },
 };
@@ -162,7 +162,7 @@ export default function GetStarted() {
               <input
                 id="address"
                 type="text"
-                placeholder="123 Main St, Santa Rosa, CA"
+                placeholder="123 Main St, Fallbrook, CA"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 className={inputClass}

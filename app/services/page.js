@@ -99,10 +99,10 @@ export default function Services() {
         <div className="wrap mx-auto max-w-2xl">
           <FadeIn>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-300">
-              Statewide coverage
+              Southern California coverage
             </span>
             <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">
-              From coastal chaparral to Sierra foothill forest.
+              From coastal chaparral to inland foothill canyons.
             </h2>
             <p className="mt-3 text-base leading-relaxed text-white/85">
               Every report is checked against the Fire Hazard Severity Zone
