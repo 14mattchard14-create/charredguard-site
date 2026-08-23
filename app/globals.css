@@ -247,13 +247,28 @@ a {
   display: flex;
   width: 100%;
   height: 14px;
-  border-radius: 3px;
-  overflow: hidden;
   box-shadow: var(--shadow-card);
 }
 .zone-band .seg {
   flex: 1;
   position: relative;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.zone-band .seg:focus-visible {
+  outline: 2px solid #c1502e;
+  outline-offset: 2px;
+}
+.zone-band .seg:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.zone-band .seg:last-child {
+  border-radius: 0 3px 3px 0;
 }
 .zone-band .seg::after {
   content: attr(data-label);
@@ -267,6 +282,7 @@ a {
   letter-spacing: 0.04em;
   color: var(--text-muted);
   white-space: nowrap;
+  pointer-events: none;
 }
 .zone-band.tight .seg::after {
   display: none;
@@ -274,11 +290,75 @@ a {
 .seg-structure { background: #3d5468; }
 .seg-noncombustible { background: #cfd8de; }
 .seg-defensible { background: var(--sand); }
-.seg-ember { background: var(--warn); }
+.seg-access { background: var(--warn); }
+
+/* Tap-to-reveal explanation for each zone segment — same copy as the
+   ZONES array in InteractiveHouse.js, so the hero band and the "What we
+   inspect" tap-explorer never disagree with each other. */
+.zone-band .seg-popover {
+  position: absolute;
+  top: 100%;
+  margin-top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  width: 230px;
+  max-width: 62vw;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  text-align: left;
+  white-space: normal;
+  cursor: default;
+}
+.zone-band .seg:first-child .seg-popover {
+  left: 0;
+  transform: none;
+}
+.zone-band .seg:last-child .seg-popover {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+.zone-band .seg-popover-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #c1502e;
+  margin-bottom: 4px;
+}
+.zone-band .seg-popover-title {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #14202b;
+  margin-bottom: 4px;
+}
+.zone-band .seg-popover-body {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #4b5b66;
+}
 
 .zone-band-wrap {
-  padding: 46px 0 34px;
-  background: var(--surface);
+  padding: 4px 0 30px;
+  background: transparent;
+}
+.zone-band-wrap .zone-band .seg::after {
+  color: rgba(255, 255, 255, 0.6);
+}
+.zone-band-wrap .caption {
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* ---------- Hero ---------- */

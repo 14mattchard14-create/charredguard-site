@@ -89,9 +89,9 @@ const ZONES = [
   },
   {
     id: "access",
-    range: "EMBER ZONE",
+    range: "ACCESS",
     title: "Access & Address",
-    body: "Whether fire crews can find and reach your property in time, and whether it's marked clearly.",
+    body: "Not part of the official WPH checklist — we check it anyway, since emergency crews finding and reaching you matters just as much on the day it counts.",
   },
 ];
 

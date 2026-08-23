@@ -92,7 +92,7 @@ const faqs = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-ink-900 text-white">
+      <section className="relative bg-ink-900 text-white">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -110,10 +110,10 @@ export default function Home() {
               <span className="text-brand-400">knowing your risk</span>.
             </h1>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-white/80">
-              Charred Guard walks your property zone by zone against Wildfire
-              Prepared Home standards, then hands you a clear, prioritized
-              report — ready to act on whenever works for you, or hand
-              straight to your insurer.
+              Every property gets evaluated zone by zone against Wildfire
+              Prepared Home standards — on-site by us, or guided by you —
+              then you get a clear, prioritized report that meets you where
+              you are, with a clear next step.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild>
@@ -151,6 +151,7 @@ export default function Home() {
         </div>
         <div className="zone-band-wrap">
           <div className="wrap">
+            <p className="caption">The four zones we assess</p>
             <ZoneBand />
           </div>
         </div>
