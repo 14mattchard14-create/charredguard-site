@@ -14,12 +14,9 @@ import { CAL_COM_BOOKING_URL } from "../lib/calcom";
 // Falls back to a plain email prompt if the link isn't configured yet, so
 // the site never ships a broken booking box while Cal.com is being set up.
 //
-// `link` defaults to the 15-min intro call but can be overridden (e.g. with
-// CAL_COM_INSPECTION_URL) to reuse this same widget for the on-site
-// inspection booking step. `prefill` (name/email) carries contact info the
-// visitor already gave us into Cal.com's own name/email fields, and — for
-// the inspection booking specifically — makes the webhook's email-based
-// match back to their existing CRM lead more reliable.
+// `link` defaults to the 15-min intro call; `prefill` (name/email) carries
+// contact info the visitor already gave us into Cal.com's own name/email
+// fields.
 export default function BookCallWidget({ height = 440, link, prefill }) {
   const elementId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const bookingUrl = link || CAL_COM_BOOKING_URL;

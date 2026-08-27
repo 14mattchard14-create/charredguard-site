@@ -29,9 +29,9 @@ const STEPS = [
     body: "No pressure, no payment required to book it. Ask basic questions if this is all new to you, confirm scope, or skip straight to requesting your assessment.",
   },
   {
-    meta: "SCHEDULED WITHIN A WEEK",
-    title: "Complete your assessment",
-    body: "Either a guided photo walkthrough you do yourself with your phone, or a full on-site visit, depending on your package and preference. Every zone is checked against Wildfire Prepared Home (WPH) criteria — a published safety standard used by fire agencies and insurers, not just our own opinion of what's safe.",
+    meta: "START ANYTIME",
+    title: "Complete your guided photo walkthrough",
+    body: "A guided walkthrough you do yourself with your phone — no waiting on a scheduled visit. Every zone is checked against Wildfire Prepared Home (WPH) criteria — a published safety standard used by fire agencies and insurers, not just our own opinion of what's safe.",
   },
   {
     meta: "~48 HRS LATER",
@@ -44,9 +44,9 @@ const STEPS = [
     body: "Fix the highest-priority items first — things like adding ember-resistant mesh to vents or clearing vegetation near the house. Use any contractor you choose; there's no obligation to hire us, or anyone, for the work itself.",
   },
   {
-    meta: "OPTIONAL · CASE BY CASE",
-    title: "Get a tailored follow-up report, if you need one",
-    body: "Once your fixes are done, this is entirely optional. We can prepare a report scoped to what you actually need — certification readiness for the official Wildfire Prepared Home designation (issued separately by IBHS, not us), documentation for your insurance provider, or both. Whether either one pans out depends on your specific property and, for insurance, your carrier's own policy.",
+    meta: "MAY BE AVAILABLE",
+    title: "Ask about a follow-up report, if you need one",
+    body: "Once your fixes are done, additional documentation support — certification readiness for the official Wildfire Prepared Home designation (issued separately by IBHS, not us), or something formatted for your insurance provider — may be available on a case-by-case basis. Reach out and ask.",
   },
 ];
 

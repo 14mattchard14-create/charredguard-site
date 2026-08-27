@@ -65,19 +65,19 @@ const faqs = [
   },
   {
     q: "Do you inspect in person, or remotely?",
-    a: "Both, depending on the package. Our Get Started flow walks you through a short property questionnaire and a free optional call, then you can choose a guided remote assessment or an on-site walkthrough.",
+    a: "Remotely. Our Get Started flow walks you through a short property questionnaire and a free optional call, then you complete a guided photo walkthrough yourself with your phone — no visit to schedule.",
   },
   {
-    q: "Is a phone-guided assessment as thorough as an on-site visit?",
-    a: "Yes. Both options are checked against the exact same Wildfire Prepared Home criteria and produce the same style of report — the only real difference is who's holding the camera. Guided Photo Assessment walks you through exactly what to photograph and from what angle, so nothing gets missed, and it's faster to start since there's no visit to schedule.",
+    q: "Is a phone-guided assessment thorough?",
+    a: "Yes. It's checked against the exact same Wildfire Prepared Home criteria as any professional inspection. Guided Photo Assessment walks you through exactly what to photograph and from what angle, so nothing gets missed — and it's faster to start since there's no visit to schedule.",
   },
   {
     q: "How long does the whole process take?",
-    a: "Most inspections are scheduled within a week, and you'll have a written, prioritized report within about 48 hours of the walkthrough or your submitted photos.",
+    a: "You can start your guided walkthrough the same day — no waiting on a scheduled visit — and you'll have a written, prioritized report within about 48 hours of submitting your photos.",
   },
   {
     q: "What happens after I get my report?",
-    a: "You'll get a ranked list of what to fix first, with photo evidence for every finding. Once the work is done, we can also prepare a tailored follow-up report on a case-by-case basis — whether that's getting ready to apply for certification at wildfireprepared.org, or something formatted for your insurance provider.",
+    a: "You'll get a ranked list of what to fix first, with photo evidence for every finding. Once the work is done, additional documentation support — for certification readiness at wildfireprepared.org, or something formatted for your insurance provider — may be available on a case-by-case basis.",
   },
   {
     q: "I'm selling my home in a high fire-hazard zone — does this help?",
@@ -111,9 +111,9 @@ export default function Home() {
             </h1>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-white/80">
               Every property gets evaluated zone by zone against Wildfire
-              Prepared Home standards — on-site by us, or guided by you —
-              then you get a clear, prioritized report that meets you where
-              you are, with a clear next step.
+              Prepared Home standards through a guided walkthrough you
+              complete yourself, then you get a clear, prioritized report
+              that meets you where you are, with a clear next step.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild>
@@ -305,9 +305,10 @@ export default function Home() {
             <p className="mt-3 text-base leading-relaxed text-white/85">
               From coastal chaparral to inland foothill canyons, every report
               is checked against the Fire Hazard Severity Zone your property
-              actually sits in — not a generic checklist. We&rsquo;re based
-              in North San Diego County, with Orange County as another
-              primary service area.
+              actually sits in — not a generic checklist. Since your
+              assessment is guided remotely, there&rsquo;s no travel radius
+              to worry about — we work with homeowners throughout Southern
+              California.
             </p>
           </FadeIn>
         </div>
@@ -325,7 +326,7 @@ export default function Home() {
               </h2>
             </FadeIn>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <FadeIn delay={0}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
                 <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-brand-50 text-brand-600">
@@ -335,7 +336,6 @@ export default function Home() {
                     <circle cx="12" cy="17" r="1.3" fill="currentColor" stroke="none" />
                   </svg>
                 </div>
-                <span className="mb-1.5 block font-mono text-xs tracking-wide text-ink-600">RECOMMENDED</span>
                 <h3 className="text-lg font-bold text-ink-900">Guided Photo Assessment</h3>
                 <span className="mb-2 mt-1 block font-mono text-xl font-bold text-brand-600">From $200</span>
                 <p className="text-sm leading-relaxed text-ink-600">
@@ -349,41 +349,24 @@ export default function Home() {
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
                 <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-brand-50 text-brand-600">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M4 15a8 8 0 0116 0" />
-                    <path d="M2 15h20" strokeLinecap="round" />
-                    <path d="M12 4v3" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <span className="mb-1.5 block font-mono text-xs tracking-wide text-ink-600">ON-SITE</span>
-                <h3 className="text-lg font-bold text-ink-900">On-Site Inspection</h3>
-                <span className="mb-2 mt-1 block font-mono text-xl font-bold text-brand-600">From $500</span>
-                <p className="text-sm leading-relaxed text-ink-600">
-                  A full zone-by-zone walkthrough and written report,
-                  covering every WPH category for your property.
-                </p>
-              </div>
-            </FadeIn>
-            <FadeIn delay={200}>
-              <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
-                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8z" />
                     <path d="M14 2v6h6" />
                     <path d="M9 13l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <span className="mb-1.5 block font-mono text-xs tracking-wide text-ink-600">CASE BY CASE</span>
-                <h3 className="text-lg font-bold text-ink-900">Post-Mitigation Reports</h3>
+                <span className="mb-1.5 block font-mono text-xs tracking-wide text-ink-600">MAY BE AVAILABLE</span>
+                <h3 className="text-lg font-bold text-ink-900">Additional Services</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                  Once your hardening work is done, we can prepare a tailored
-                  follow-up report — for certification readiness, your
-                  insurance provider, or both — scoped to your situation.
+                  Once your hardening work is done, follow-up documentation
+                  — for certification readiness, your insurance provider, or
+                  both — may be available on a case-by-case basis. Reach out
+                  to ask.
                 </p>
               </div>
             </FadeIn>
           </div>
           <p className="mt-6 text-sm text-ink-600">
-            Prices shown are typical starting rates — answer a few questions to get your exact quote based on package and property size.
+            Price shown is a typical starting rate — answer a few questions to get your exact quote based on package and property size.
           </p>
         </div>
       </section>
@@ -463,7 +446,7 @@ export default function Home() {
                   Ready to see where you stand?
                 </h2>
                 <p className="mt-2 max-w-md text-white/75">
-                  Answer a few questions, get a package recommendation, and book your assessment.
+                  Answer a few questions, get a package recommendation, and start your assessment.
                 </p>
               </div>
               <Button asChild size="lg">

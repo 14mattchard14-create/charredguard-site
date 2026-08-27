@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import BookCallWidget from "../../components/BookCallWidget";
-import { CAL_COM_INSPECTION_URL } from "../../lib/calcom";
 import { getPaymentSummary, validatePaymentDetails } from "../../lib/payment.mjs";
 
 const PHASES = ["Goals", "Package & call", "Request", "Done"];
@@ -20,17 +19,10 @@ const PACKAGES = {
   },
 };
 
-const METHODS = {
-  photo: {
-    name: "Guided Photo Assessment",
-    price: 200,
-    blurb: "A guided walkthrough you complete yourself with your phone. Start today — no waiting on a scheduled visit.",
-  },
-  onsite: {
-    name: "On-Site Inspection",
-    price: 500,
-    blurb: "A full in-person walkthrough, scheduled within about a week.",
-  },
+const METHOD = {
+  name: "Guided Photo Assessment",
+  price: 200,
+  blurb: "A guided walkthrough you complete yourself with your phone. Start today — no waiting on a scheduled visit.",
 };
 
 const inputClass =
@@ -61,7 +53,6 @@ export default function GetStarted() {
   const [goals, setGoals] = useState({});
   const [tier, setTier] = useState(null);
   const [recommendedTier, setRecommendedTier] = useState(null);
-  const [method, setMethod] = useState("photo");
   const [consultChoice, setConsultChoice] = useState(null);
   const [contact, setContact] = useState({ name: "", email: "", phone: "" });
   const [paymentMode, setPaymentMode] = useState("payLater");
@@ -72,7 +63,7 @@ export default function GetStarted() {
   const [guidedInviteLink, setGuidedInviteLink] = useState(null);
 
   const phaseIndex = step <= 1 ? 0 : step === 2 ? 1 : step === 3 ? 2 : 3;
-  const paymentSummary = getPaymentSummary({ tier: tier || "Base", method });
+  const paymentSummary = getPaymentSummary({ tier: tier || "Base" });
 
   // Booking itself happens inside the embedded Cal.com widget (its own
   // confirmation flow, independent of this form) — we only need to know
@@ -107,37 +98,32 @@ export default function GetStarted() {
 
     // Guided Photo Assessment needs no scheduling on our end — create the
     // property + homeowner invite right now and hand the customer their
-    // walkthrough link immediately (also emailed to them). On-Site
-    // Inspection still just confirms here; that property gets created by
-    // the Cal.com webhook once they actually pick a time on step 4.
-    if (method === "photo") {
-      try {
-        const res = await fetch("/api/guided-request", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            address,
-            name: contact.name,
-            email: contact.email,
-            phone: contact.phone,
-            leadNotes: `${PACKAGES[tier].name} package via ${METHODS[method].name}${
-              consultChoice === "booked" ? " + booked intro call" : ""
-            }, ${paymentMode === "payNow" ? "paid" : "pay later"}.`,
-          }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(data.error || "Could not start your guided assessment");
-        setGuidedInviteLink(data.inviteLink);
-      } catch (err) {
-        setSubmitting(false);
-        setSubmitError(err.message || "Something went wrong — please try again.");
-        return;
-      }
+    // walkthrough link immediately (also emailed to them).
+    try {
+      const res = await fetch("/api/guided-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          address,
+          name: contact.name,
+          email: contact.email,
+          phone: contact.phone,
+          leadNotes: `${PACKAGES[tier].name} package via ${METHOD.name}${
+            consultChoice === "booked" ? " + booked intro call" : ""
+          }, ${paymentMode === "payNow" ? "paid" : "pay later"}.`,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Could not start your guided assessment");
+      setGuidedInviteLink(data.inviteLink);
+    } catch (err) {
+      setSubmitting(false);
+      setSubmitError(err.message || "Something went wrong — please try again.");
+      return;
     }
 
-    // NOTE: the rest of this (payment, non-photo lead capture) still
-    // confirms locally, same as the /contact form. Wire up to a real
-    // gateway such as Stripe once the backend exists.
+    // NOTE: payment still confirms locally, same as the /contact form.
+    // Wire up to a real gateway such as Stripe once the backend exists.
     setTimeout(() => {
       setSubmitting(false);
       setStep(4);
@@ -186,8 +172,6 @@ export default function GetStarted() {
             setTier={setTier}
             recommendedTier={recommendedTier}
             goals={goals}
-            method={method}
-            setMethod={setMethod}
             consultChoice={consultChoice}
             setConsultChoice={setConsultChoice}
             consultReady={consultReady}
@@ -202,7 +186,7 @@ export default function GetStarted() {
             <h2 className="mt-2 text-2xl font-extrabold text-ink-900">How should we reach you?</h2>
             <p className="mb-4 mt-1 text-sm text-ink-600">
               We&rsquo;ll confirm your {PACKAGES[tier].name} assessment via{" "}
-              {METHODS[method].name} (${METHODS[method].price})
+              {METHOD.name} (${METHOD.price})
               {consultChoice === "booked" ? " and your booked call" : ""}, usually
               within one business day.
             </p>
@@ -367,24 +351,13 @@ export default function GetStarted() {
             </div>
             <h2 className="text-2xl font-extrabold text-ink-900">Request received</h2>
             <p className="mx-auto mt-2 max-w-[42ch] text-sm text-ink-600">
-              {method === "photo" ? (
-                <>
-                  Thanks — your {PACKAGES[tier].name} assessment via {METHODS[method].name} is
-                  ready to start
-                  {consultChoice === "booked" ? ", and your intro call is booked" : ""}.
-                </>
-              ) : (
-                <>
-                  Thanks — we&rsquo;ll reach out within one business day to confirm your{" "}
-                  {PACKAGES[tier].name} assessment via {METHODS[method].name}
-                  {consultChoice === "booked" ? " and your booked call" : ""}, usually within one
-                  business day.
-                </>
-              )}{" "}
+              Thanks — your {PACKAGES[tier].name} assessment via {METHOD.name} is
+              ready to start
+              {consultChoice === "booked" ? ", and your intro call is booked" : ""}.{" "}
               {paymentMode === "payNow" ? "Your payment was accepted in this demo checkout." : "You can pay the deposit later once we confirm the appointment."}
             </p>
 
-            {method === "photo" && guidedInviteLink && (
+            {guidedInviteLink && (
               <div className="mt-6 text-left">
                 <div className="rounded-xl border border-surface-line bg-surface-muted p-4">
                   <p className="text-sm font-bold text-ink-900">Start your guided walkthrough</p>
@@ -403,24 +376,6 @@ export default function GetStarted() {
                   <Button asChild>
                     <a href={guidedInviteLink}>Start now</a>
                   </Button>
-                </div>
-              </div>
-            )}
-
-            {method === "onsite" && (
-              <div className="mt-6 text-left">
-                <div className="rounded-xl border border-surface-line bg-surface-muted p-4">
-                  <p className="text-sm font-bold text-ink-900">Pick a time for your on-site inspection</p>
-                  <p className="mt-1 text-sm text-ink-600">
-                    Grab a slot below — no need to wait for us to reach out first.
-                  </p>
-                </div>
-                <div className="mt-3.5">
-                  <BookCallWidget
-                    height={480}
-                    link={CAL_COM_INSPECTION_URL}
-                    prefill={{ name: contact.name, email: contact.email }}
-                  />
                 </div>
               </div>
             )}
@@ -551,8 +506,6 @@ function PackageCallStep({
   setTier,
   recommendedTier,
   goals,
-  method,
-  setMethod,
   consultChoice,
   setConsultChoice,
   consultReady,
@@ -611,38 +564,6 @@ function PackageCallStep({
             guaranteed.
           </>
         )}
-      </div>
-
-      <div className="my-7 border-t border-surface-line" />
-
-      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">How you complete it</span>
-      <h2 className="mt-2 text-lg font-bold text-ink-900">Guided photos, or an on-site visit?</h2>
-      <p className="mb-4 mt-1 text-sm text-ink-600">
-        Same criteria checked either way — this just determines who takes the photos.
-      </p>
-      <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-        {Object.keys(METHODS).map((key) => (
-          <div
-            key={key}
-            className={`relative cursor-pointer rounded-xl border-[1.5px] p-5 transition-all ${
-              method === key
-                ? "border-ink-900 shadow-[0_0_0_3px_rgba(21,31,40,0.08)]"
-                : "border-surface-line hover:border-brand-500"
-            }`}
-            onClick={() => setMethod(key)}
-          >
-            {key === "photo" && (
-              <div className="absolute -top-2.5 left-4 rounded-full bg-brand-500 px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-wide text-white">
-                Recommended
-              </div>
-            )}
-            <span className="inline-block rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-600">
-              ${METHODS[key].price}
-            </span>
-            <div className="mt-2 text-[1.02rem] font-bold text-ink-900">{METHODS[key].name}</div>
-            <p className="mt-2 text-sm leading-relaxed text-ink-600">{METHODS[key].blurb}</p>
-          </div>
-        ))}
       </div>
 
       <div className="my-7 border-t border-surface-line" />
