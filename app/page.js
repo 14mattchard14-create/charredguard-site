@@ -14,46 +14,6 @@ function HeroCheckIcon() {
   );
 }
 
-const trust = [
-  {
-    title: "Flat-fee pricing",
-    body: "One price for your package, agreed before we start. No surprise add-ons once we're on site.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Built on published criteria",
-    body: "Every finding is measured against Wildfire Prepared Home's own criteria and local Fire Hazard Severity Zone data, not a generic score.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Photo-documented, zone by zone",
-    body: "Every finding in your report is backed by a photo, organized by zone, so you can see exactly what we saw.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="12" cy="13" r="4" />
-        <path d="M3 8h4l2-3h6l2 3h4v11H3z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Independent assessment",
-    body: "We're not selling the mitigation work or a policy, so there's no incentive to inflate — or downplay — what we find.",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-];
-
 const faqs = [
   {
     q: "Is this the same as getting Wildfire Prepared Home certified?",
@@ -181,54 +141,6 @@ export default function Home() {
           <FadeIn delay={300}>
             <InteractiveHouse />
           </FadeIn>
-        </div>
-      </section>
-
-      <section className="bg-surface-muted py-16 md:py-20">
-        <div className="wrap">
-          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
-            <FadeIn delay={0}>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
-                <img
-                  src="/fr0ggy5-lGrpmwub2D8-unsplash.jpg"
-                  alt="Home surrounded by forest in a wildland-urban interface setting"
-                  className="block h-full w-full object-cover"
-                />
-                <div className="absolute bottom-4 left-4 rounded-xl bg-white px-4 py-3 shadow-lg">
-                  <span className="block font-mono text-xl font-bold leading-tight text-brand-600">
-                    15
-                  </span>
-                  <span className="text-xs text-ink-600">
-                    WPH categories checked
-                  </span>
-                </div>
-              </div>
-            </FadeIn>
-            <div>
-              <FadeIn delay={0}>
-                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
-                  Why Charred Guard
-                </span>
-              </FadeIn>
-              <FadeIn delay={100}>
-                <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
-                  An assessment you can actually trust.
-                </h2>
-              </FadeIn>
-              <FadeIn delay={200}>
-                <ul className="mt-5 grid gap-3">
-                  {trust.map((t) => (
-                    <li key={t.title} className="flex items-start gap-2.5 text-sm text-ink-600">
-                      <span className="mt-0.5 shrink-0 text-brand-500">{t.icon}</span>
-                      <span>
-                        <strong className="text-ink-900">{t.title}.</strong> {t.body}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </FadeIn>
-            </div>
-          </div>
         </div>
       </section>
 
