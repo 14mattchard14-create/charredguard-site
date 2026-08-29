@@ -152,18 +152,14 @@ export default function Home() {
                 Insurance
               </span>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
-                Insurance in fire country is complicated. We&rsquo;re here to help you navigate it.
+                From risk to coverage — know where you stand.
               </h2>
               <p className="mt-3 text-base leading-relaxed text-ink-600">
-                More insurers are pulling back from high-risk areas, and
-                thousands of California homeowners have landed on the FAIR
-                Plan, the state&rsquo;s insurer of last resort. A documented,
-                criteria-based assessment gives you the kind of paperwork
-                carriers actually ask for — showing exactly where your
-                property stands today. It&rsquo;s not a guarantee of coverage
-                or a discount; that&rsquo;s always up to your individual
-                carrier. But walking in with real documentation puts you in a
-                stronger position than walking in with none.
+                California&rsquo;s insurance market has gotten unforgiving
+                for homes in fire-prone areas. Your assessment replaces that
+                uncertainty with something concrete — documented proof of
+                what&rsquo;s driving your risk, and what to fix first.
+                Knowing exactly where you stand is where progress starts.
               </p>
             </FadeIn>
           </div>
