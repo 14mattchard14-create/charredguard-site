@@ -68,7 +68,7 @@ export default function Services() {
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {categories.map((c, i) => (
               <FadeIn key={c.title} delay={(i % 2) * 100}>
-                <div className="h-full rounded-xl border border-surface-line bg-white p-6 transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-400 hover:shadow-md">
+                <div className="h-full rounded-xl border border-surface-line bg-white p-6">
                   <span className="mb-2 block font-mono text-xs tracking-wide text-ink-600">{c.range}</span>
                   <h3 className="text-base font-bold text-ink-900">{c.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-600">{c.body}</p>
@@ -77,13 +77,29 @@ export default function Services() {
             ))}
           </div>
           <FadeIn delay={200}>
-            <div className="mt-6 rounded-lg bg-surface-muted p-3.5 text-sm leading-relaxed text-ink-600">
-              Selling in a High or Very High Fire Hazard Severity Zone?
-              California&rsquo;s AB-38 law requires proof of defensible space
-              compliance before closing. We don&rsquo;t issue that official
-              paperwork — your local fire department does — but an
-              assessment against these same categories can get you ready for
-              it well before escrow gets tight.
+            <div className="mt-6 flex gap-3.5 rounded-lg bg-surface-muted p-4">
+              <svg
+                className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4M12 16h.01" strokeLinecap="round" />
+              </svg>
+              <div>
+                <p className="font-semibold text-ink-900">Selling in a High or Very High Fire Hazard Severity Zone?</p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-600">
+                  California&rsquo;s AB-38 law requires proof of defensible space
+                  compliance before closing. We don&rsquo;t issue that official
+                  paperwork — your local fire department does — but an
+                  assessment against these same categories can get you ready for
+                  it well before escrow gets tight.
+                </p>
+              </div>
             </div>
           </FadeIn>
         </div>
@@ -98,7 +114,7 @@ export default function Services() {
       >
         <div className="wrap mx-auto max-w-2xl">
           <FadeIn>
-            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-300">
+            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-white/60">
               Southern California coverage
             </span>
             <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">
@@ -116,7 +132,7 @@ export default function Services() {
         <div className="wrap">
           <div className="mb-10 max-w-xl">
             <FadeIn>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 What you receive
               </span>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
@@ -127,7 +143,7 @@ export default function Services() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <FadeIn delay={0}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
-                <span className="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 font-mono text-xs tracking-wide text-brand-600">
+                <span className="mb-3 inline-block rounded-full bg-surface-muted px-3 py-1 font-mono text-xs tracking-wide text-ink-700">
                   RISK RATING
                 </span>
                 <h3 className="text-lg font-bold text-ink-900">Overall risk snapshot</h3>
@@ -138,7 +154,7 @@ export default function Services() {
             </FadeIn>
             <FadeIn delay={100}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
-                <span className="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 font-mono text-xs tracking-wide text-brand-600">
+                <span className="mb-3 inline-block rounded-full bg-surface-muted px-3 py-1 font-mono text-xs tracking-wide text-ink-700">
                   PRIORITIES
                 </span>
                 <h3 className="text-lg font-bold text-ink-900">Ranked action plan</h3>
@@ -149,7 +165,7 @@ export default function Services() {
             </FadeIn>
             <FadeIn delay={200}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
-                <span className="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 font-mono text-xs tracking-wide text-brand-600">
+                <span className="mb-3 inline-block rounded-full bg-surface-muted px-3 py-1 font-mono text-xs tracking-wide text-ink-700">
                   EVIDENCE
                 </span>
                 <h3 className="text-lg font-bold text-ink-900">Photos, by zone</h3>

@@ -41,7 +41,7 @@ export default function Contact() {
         <div className="wrap">
           <FadeIn delay={0}>
             <div className="mb-16 md:mb-20">
-              <span className="mb-2 block font-mono text-xs uppercase tracking-wide text-brand-600">
+              <span className="mb-2 block font-mono text-xs uppercase tracking-wide text-ink-600">
                 Talk it through first
               </span>
               <h2 className="mb-4 text-2xl font-extrabold text-ink-900">
@@ -60,7 +60,7 @@ export default function Contact() {
               <div>
                 <div className="mb-6 flex gap-3.5">
                   <div>
-                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Email</span>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-ink-600">Email</span>
                     <a href="mailto:hello@charredguard.com" className="text-ink-900 no-underline hover:text-brand-600">
                       hello@charredguard.com
                     </a>
@@ -68,19 +68,19 @@ export default function Contact() {
                 </div>
                 <div className="mb-6 flex gap-3.5">
                   <div>
-                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Service area</span>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-ink-600">Service area</span>
                     <p className="text-sm text-ink-600">Southern California, primarily North San Diego County and Orange County.</p>
                   </div>
                 </div>
                 <div className="mb-6 flex gap-3.5">
                   <div>
-                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Response time</span>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-ink-600">Response time</span>
                     <p className="text-sm text-ink-600">Within 1 business day.</p>
                   </div>
                 </div>
                 <div className="flex gap-3.5">
                   <div>
-                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-brand-600">Real estate agents</span>
+                    <span className="mb-1 block font-mono text-xs uppercase tracking-wide text-ink-600">Real estate agents</span>
                     <p className="text-sm text-ink-600">
                       Working with clients in a high fire-hazard zone? Happy
                       to help them get ahead of California&rsquo;s AB-38

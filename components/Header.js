@@ -18,7 +18,7 @@ export default function Header() {
           <img src="/logo-white.png" alt="Charred Guard shield logo" className="h-[54px] w-auto" />
           <span className="font-display text-lg font-extrabold leading-tight tracking-wide">
             Charred Guard
-            <span className="mt-0.5 block text-[0.62rem] font-medium tracking-[0.22em] text-brand-400">
+            <span className="mt-0.5 block text-[0.62rem] font-medium tracking-[0.22em] text-white/55">
               Wildfire Home Hardening
             </span>
           </span>

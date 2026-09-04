@@ -13,7 +13,7 @@ export default function PageHero({ eyebrow, title, children }) {
       <div className="wrap relative py-14 md:py-16">
         <FadeIn>
           <div className="max-w-2xl">
-            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-400">
+            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-white/60">
               {eyebrow}
             </span>
             <h1 className="mt-3 font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-white md:text-4xl">

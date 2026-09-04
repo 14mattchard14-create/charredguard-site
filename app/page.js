@@ -121,7 +121,7 @@ export default function Home() {
         <div className="wrap">
           <div className="mb-10 max-w-xl">
             <FadeIn delay={0}>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 What we inspect
               </span>
             </FadeIn>
@@ -148,7 +148,7 @@ export default function Home() {
         <div className="wrap">
           <div className="mx-auto max-w-2xl text-center">
             <FadeIn delay={0}>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 Insurance
               </span>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
@@ -170,7 +170,7 @@ export default function Home() {
         <div className="wrap">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <FadeIn delay={0}>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 How it works
               </span>
             </FadeIn>
@@ -204,7 +204,7 @@ export default function Home() {
       >
         <div className="wrap mx-auto max-w-2xl">
           <FadeIn delay={0}>
-            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-300">
+            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-white/60">
               Where we work
             </span>
             <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">
@@ -226,7 +226,7 @@ export default function Home() {
         <div className="wrap">
           <div className="mb-10 max-w-xl">
             <FadeIn delay={0}>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 Service options
               </span>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
@@ -237,7 +237,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <FadeIn delay={0}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
-                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-surface-muted text-ink-700">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <rect x="6" y="2" width="12" height="20" rx="2" />
                     <path d="M10 5h4" strokeLinecap="round" />
@@ -245,7 +245,7 @@ export default function Home() {
                   </svg>
                 </div>
                 <h3 className="text-lg font-bold text-ink-900">Guided Photo Assessment</h3>
-                <span className="mb-2 mt-1 block font-mono text-xl font-bold text-brand-600">From $200</span>
+                <span className="mb-2 mt-1 block font-mono text-xl font-bold text-ink-900">From $200</span>
                 <p className="text-sm leading-relaxed text-ink-600">
                   A guided walkthrough you complete yourself with your phone,
                   reviewed and written up by us. Start today — no waiting on
@@ -255,7 +255,7 @@ export default function Home() {
             </FadeIn>
             <FadeIn delay={100}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm transition-all duration-150 hover:-translate-y-1 hover:shadow-md">
-                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <div className="mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-surface-muted text-ink-700">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8z" />
                     <path d="M14 2v6h6" />
@@ -283,7 +283,7 @@ export default function Home() {
         <div className="wrap">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <FadeIn delay={0}>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 What you actually get
               </span>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
@@ -305,7 +305,7 @@ export default function Home() {
         <div className="wrap">
           <div className="mx-auto mb-10 max-w-xl text-center">
             <FadeIn delay={0}>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                 Questions
               </span>
               <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl">
@@ -320,7 +320,7 @@ export default function Home() {
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink-900 [&::-webkit-details-marker]:hidden">
                     {f.q}
                     <svg
-                      className="shrink-0 text-brand-600 transition-transform duration-200 group-open:rotate-180"
+                      className="shrink-0 text-ink-600 transition-transform duration-200 group-open:rotate-180"
                       width="18"
                       height="18"
                       viewBox="0 0 24 24"

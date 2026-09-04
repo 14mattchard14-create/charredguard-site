@@ -26,7 +26,7 @@ export default function About() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <FadeIn delay={0}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm">
-                <span className="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 font-mono text-xs tracking-wide text-brand-600">
+                <span className="mb-3 inline-block rounded-full bg-surface-muted px-3 py-1 font-mono text-xs tracking-wide text-ink-700">
                   WHY WE STARTED
                 </span>
                 <h3 className="text-lg font-bold text-ink-900">Reports people could act on</h3>
@@ -39,7 +39,7 @@ export default function About() {
             </FadeIn>
             <FadeIn delay={100}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm">
-                <span className="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 font-mono text-xs tracking-wide text-brand-600">
+                <span className="mb-3 inline-block rounded-full bg-surface-muted px-3 py-1 font-mono text-xs tracking-wide text-ink-700">
                   HOW WE INSPECT
                 </span>
                 <h3 className="text-lg font-bold text-ink-900">The same standard, every time</h3>
@@ -52,7 +52,7 @@ export default function About() {
             </FadeIn>
             <FadeIn delay={200}>
               <div className="h-full rounded-2xl border border-surface-line bg-white p-7 shadow-sm">
-                <span className="mb-3 inline-block rounded-full bg-brand-50 px-3 py-1 font-mono text-xs tracking-wide text-brand-600">
+                <span className="mb-3 inline-block rounded-full bg-surface-muted px-3 py-1 font-mono text-xs tracking-wide text-ink-700">
                   WHO IT&rsquo;S FOR
                 </span>
                 <h3 className="text-lg font-bold text-ink-900">Owners, insurers, and inspectors</h3>
@@ -72,7 +72,7 @@ export default function About() {
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
             <div>
               <FadeIn delay={0}>
-                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
                   Our approach
                 </span>
               </FadeIn>
@@ -84,7 +84,7 @@ export default function About() {
               <FadeIn delay={200}>
                 <ul className="mt-5 grid gap-3">
                   <li className="flex items-start gap-2.5 text-sm text-ink-600">
-                    <span className="mt-0.5 shrink-0 text-brand-500"><CheckIcon /></span>
+                    <span className="mt-0.5 shrink-0 text-ink-900"><CheckIcon /></span>
                     <span>
                       <strong className="text-ink-900">Independent.</strong> We assess your property, we
                       don&rsquo;t sell the fix, keeping the incentive on getting
@@ -92,7 +92,7 @@ export default function About() {
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-ink-600">
-                    <span className="mt-0.5 shrink-0 text-brand-500"><CheckIcon /></span>
+                    <span className="mt-0.5 shrink-0 text-ink-900"><CheckIcon /></span>
                     <span>
                       <strong className="text-ink-900">Criteria-based.</strong> Findings are measured
                       against Wildfire Prepared Home&rsquo;s published criteria
@@ -100,7 +100,7 @@ export default function About() {
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5 text-sm text-ink-600">
-                    <span className="mt-0.5 shrink-0 text-brand-500"><CheckIcon /></span>
+                    <span className="mt-0.5 shrink-0 text-ink-900"><CheckIcon /></span>
                     <span>
                       <strong className="text-ink-900">Documented.</strong> Every finding is
                       photo-documented and organized by zone, so the report
@@ -119,7 +119,7 @@ export default function About() {
                   className="block h-full w-full object-cover"
                 />
                 <div className="absolute bottom-4 left-4 rounded-xl bg-white px-4 py-3 shadow-lg">
-                  <span className="block font-mono text-xl font-bold leading-tight text-brand-600">0%</span>
+                  <span className="block font-mono text-xl font-bold leading-tight text-ink-900">0%</span>
                   <span className="text-xs text-ink-600">Mitigation work sold</span>
                 </div>
               </div>

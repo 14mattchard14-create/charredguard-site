@@ -2182,3 +2182,17 @@ a {
     display: none;
   }
 }
+@media (max-width: 480px) {
+  .report-doc-row-head {
+    flex-wrap: wrap;
+  }
+  .report-doc-row-head .info {
+    min-width: 0;
+  }
+  .report-doc-tag {
+    order: 3;
+    flex-basis: 100%;
+    margin: 4px 0 0 52px;
+    width: fit-content;
+  }
+}

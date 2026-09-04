@@ -39,6 +39,15 @@ function whyText(tier) {
     : "Recommended for you — no renovations planned, so Essential covers what matters most right now.";
 }
 
+// Loose "street, city, state [zip]" shape — enough to catch a name typed
+// into the wrong box or a half-finished address, without needing a geocoding
+// API this repo doesn't have keys for.
+const ADDRESS_PATTERN = /^\d+\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+)*,\s*[A-Za-z\s]+,\s*[A-Za-z]{2}(\s+\d{5}(-\d{4})?)?$/;
+
+function isValidAddress(value) {
+  return ADDRESS_PATTERN.test(value.trim());
+}
+
 function IconCheck() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
@@ -50,6 +59,7 @@ function IconCheck() {
 export default function GetStarted() {
   const [step, setStep] = useState(0);
   const [address, setAddress] = useState("");
+  const [addressTouched, setAddressTouched] = useState(false);
   const [goals, setGoals] = useState({});
   const [tier, setTier] = useState(null);
   const [recommendedTier, setRecommendedTier] = useState(null);
@@ -137,7 +147,7 @@ export default function GetStarted() {
 
         {step === 0 && (
           <div className="rounded-2xl border border-surface-line bg-white p-6 shadow-sm md:p-9">
-            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">Step 1</span>
+            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">Step 1</span>
             <h2 className="mt-2 text-2xl font-extrabold text-ink-900">Let&rsquo;s start with your address</h2>
             <p className="mb-4 mt-1 text-sm text-ink-600">
               We&rsquo;ll use this to confirm your Fire Hazard Severity Zone and scope your
@@ -151,11 +161,23 @@ export default function GetStarted() {
                 placeholder="123 Main St, Fallbrook, CA"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                onBlur={() => setAddressTouched(true)}
                 className={inputClass}
               />
+              {addressTouched && address.trim() && !isValidAddress(address) && (
+                <p className="text-sm text-red-600">
+                  Enter a full address with street, city, and state, like 123 Main St, Fallbrook, CA
+                </p>
+              )}
             </div>
             <div className="mt-5 text-right">
-              <Button disabled={!address.trim()} onClick={() => setStep(1)}>
+              <Button
+                disabled={!isValidAddress(address)}
+                onClick={() => {
+                  setAddressTouched(true);
+                  if (isValidAddress(address)) setStep(1);
+                }}
+              >
                 Continue
               </Button>
             </div>
@@ -182,7 +204,7 @@ export default function GetStarted() {
 
         {step === 3 && (
           <div className="rounded-2xl border border-surface-line bg-white p-6 shadow-sm md:p-9">
-            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">Last step</span>
+            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">Last step</span>
             <h2 className="mt-2 text-2xl font-extrabold text-ink-900">How should we reach you?</h2>
             <p className="mb-4 mt-1 text-sm text-ink-600">
               We&rsquo;ll confirm your {PACKAGES[tier].name} assessment via{" "}
@@ -455,7 +477,7 @@ function GoalsStep({ goals, setGoals, onBack, onContinue }) {
 
   return (
     <div className="rounded-2xl border border-surface-line bg-white p-6 shadow-sm md:p-9">
-      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">Understand your goals</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">Understand your goals</span>
       <h2 className="mt-2 text-2xl font-extrabold text-ink-900">A few quick questions</h2>
       <p className="mb-1.5 mt-1 text-sm text-ink-600">
         This helps us scope the right package for your home — no technical wildfire terms
@@ -514,7 +536,7 @@ function PackageCallStep({
 }) {
   return (
     <div className="rounded-2xl border border-surface-line bg-white p-6 shadow-sm md:p-9">
-      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">Choose your package</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">Choose your package</span>
       <h2 className="mt-2 text-2xl font-extrabold text-ink-900">Essential and Enhanced — each built on a different WPH criteria level</h2>
       <p className="mb-4 mt-1 text-sm text-ink-600">
         Pick either — the recommended one is based on your answers, but you can choose the
@@ -537,13 +559,13 @@ function PackageCallStep({
                 Recommended
               </div>
             )}
-            <span className="inline-block rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-600">
+            <span className="inline-block rounded-full bg-surface-muted px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-ink-700">
               {PACKAGES[key].name}
             </span>
             <div className="mt-2 text-[1.02rem] font-bold text-ink-900">{PACKAGES[key].name} assessment</div>
             <p className="mt-2 text-sm leading-relaxed text-ink-600">{PACKAGES[key].desc}</p>
             {recommendedTier === key && (
-              <div className="mt-3 flex items-center gap-1.5 rounded-lg bg-brand-50 px-2.5 py-2 text-xs font-semibold text-brand-600">
+              <div className="mt-3 flex items-center gap-1.5 rounded-lg bg-surface-muted px-2.5 py-2 text-xs font-semibold text-ink-700">
                 <IconCheck /> {whyText(key)}
               </div>
             )}
@@ -568,7 +590,7 @@ function PackageCallStep({
 
       <div className="my-7 border-t border-surface-line" />
 
-      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-brand-600">Optional</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">Optional</span>
       <h2 className="mt-2 text-lg font-bold text-ink-900">Want to talk it through first?</h2>
       <p className="mb-4 mt-1 text-sm text-ink-600">
         A free 15-minute call to confirm your package and answer questions — completely
