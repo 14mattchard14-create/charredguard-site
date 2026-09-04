@@ -101,9 +101,18 @@ export default function ReportPreview() {
 
   const visible = tab === "all" ? FINDINGS : FINDINGS.filter((f) => f.priority === tab);
 
+  // Sets scrollLeft directly rather than el.scrollIntoView() — scrollIntoView's
+  // block:'nearest' still scrolls ancestor containers (including the page
+  // itself) toward the target when it isn't yet in the viewport, which on
+  // mount (before this section has scrolled into view) yanked the whole
+  // page down to it. Only ever touching scrollLeft keeps this strictly
+  // horizontal, no matter where the section sits on the page.
   useEffect(() => {
-    const el = tabScrollRef.current?.querySelector(`[data-tab-key="${tab}"]`);
-    el?.scrollIntoView({ behavior: "instant", inline: "center", block: "nearest" });
+    const container = tabScrollRef.current;
+    const el = container?.querySelector(`[data-tab-key="${tab}"]`);
+    if (!container || !el) return;
+    const target = el.offsetLeft - (container.clientWidth - el.clientWidth) / 2;
+    container.scrollLeft = Math.max(0, target);
   }, [tab]);
 
   function scrollTabs(dir) {
