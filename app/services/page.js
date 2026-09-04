@@ -4,46 +4,56 @@ import PageHero from "../../components/PageHero";
 import FadeIn from "../../components/FadeIn";
 import { Button } from "../../components/ui/button";
 
-const categories = [
+const categoryGroups = [
   {
-    range: "OVERALL SITE",
-    title: "Site & Environmental Overview",
-    body: "Terrain, slope, prevailing wind exposure, and surrounding vegetation that shape how fire would approach the property.",
+    label: "Defensible space zones",
+    items: [
+      {
+        range: "OVERALL SITE",
+        title: "Site & Environmental Overview",
+        body: "Terrain, slope, prevailing wind exposure, and surrounding vegetation that shape how fire would approach the property.",
+      },
+      {
+        range: "0–5 FT",
+        title: "Noncombustible Zone",
+        body: "The five feet immediately around the structure, checked for mulch, plants, and debris that give embers a foothold.",
+      },
+      {
+        range: "5–30 FT",
+        title: "Defensible Space — Vegetation",
+        body: "Plant spacing, canopy separation, and fuel load in the zone that gives you time before a fire reaches the home.",
+      },
+      {
+        range: "10–30 FT",
+        title: "Detached Structures & Large Items",
+        body: "Sheds, wood piles, propane tanks, and anything else nearby that could ignite and carry fire toward the house.",
+      },
+    ],
   },
   {
-    range: "0–5 FT",
-    title: "Noncombustible Zone",
-    body: "The five feet immediately around the structure, checked for mulch, plants, and debris that give embers a foothold.",
-  },
-  {
-    range: "5–30 FT",
-    title: "Defensible Space — Vegetation",
-    body: "Plant spacing, canopy separation, and fuel load in the zone that gives you time before a fire reaches the home.",
-  },
-  {
-    range: "10–30 FT",
-    title: "Detached Structures & Large Items",
-    body: "Sheds, wood piles, propane tanks, and anything else nearby that could ignite and carry fire toward the house.",
-  },
-  {
-    range: "STRUCTURE",
-    title: "Roof, Gutters, Wall Clearance & Vents",
-    body: "The roofline and the 6-inch noncombustible clearance at the base of walls, plus ember-resistant vent screening.",
-  },
-  {
-    range: "STRUCTURE",
-    title: "Eaves, Soffits, Skylights & Siding",
-    body: "Enclosed eaves, protected skylights, and exterior wall coverings rated to resist ember intrusion and radiant heat.",
-  },
-  {
-    range: "STRUCTURE",
-    title: "Windows, Doors, Decks & Patios",
-    body: "Glazing, door seals, and any overhead structures attached to the home that could transmit fire into the interior.",
-  },
-  {
-    range: "ACCESS",
-    title: "Access & Address",
-    body: "Whether emergency access routes are clear and your address is visible enough for crews to find you fast.",
+    label: "Structure & access",
+    items: [
+      {
+        range: "STRUCTURE",
+        title: "Roof, Gutters, Wall Clearance & Vents",
+        body: "The roofline and the 6-inch noncombustible clearance at the base of walls, plus ember-resistant vent screening.",
+      },
+      {
+        range: "STRUCTURE",
+        title: "Eaves, Soffits, Skylights & Siding",
+        body: "Enclosed eaves, protected skylights, and exterior wall coverings rated to resist ember intrusion and radiant heat.",
+      },
+      {
+        range: "STRUCTURE",
+        title: "Windows, Doors, Decks & Patios",
+        body: "Glazing, door seals, and any overhead structures attached to the home that could transmit fire into the interior.",
+      },
+      {
+        range: "ACCESS",
+        title: "Access & Address",
+        body: "Whether emergency access routes are clear and your address is visible enough for crews to find you fast.",
+      },
+    ],
   },
 ];
 
@@ -65,15 +75,24 @@ export default function Services() {
 
       <section className="bg-white py-16 md:py-20">
         <div className="wrap">
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {categories.map((c, i) => (
-              <FadeIn key={c.title} delay={(i % 2) * 100}>
-                <div className="h-full rounded-xl border border-surface-line bg-white p-6">
-                  <span className="mb-2 block font-mono text-xs tracking-wide text-ink-600">{c.range}</span>
-                  <h3 className="text-base font-bold text-ink-900">{c.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{c.body}</p>
+          <div className="flex flex-col gap-8">
+            {categoryGroups.map((group) => (
+              <div key={group.label}>
+                <h3 className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-ink-600">
+                  {group.label}
+                </h3>
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                  {group.items.map((c, i) => (
+                    <FadeIn key={c.title} delay={(i % 2) * 100}>
+                      <div className="h-full rounded-xl border border-surface-line bg-white p-6">
+                        <span className="mb-2 block font-mono text-xs tracking-wide text-ink-600">{c.range}</span>
+                        <h3 className="text-base font-bold text-ink-900">{c.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-ink-600">{c.body}</p>
+                      </div>
+                    </FadeIn>
+                  ))}
                 </div>
-              </FadeIn>
+              </div>
             ))}
           </div>
           <FadeIn delay={200}>

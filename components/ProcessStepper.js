@@ -76,7 +76,6 @@ function ChevronIcon({ flip }) {
 
 export default function ProcessStepper() {
   const [step, setStep] = useState(0);
-  const current = STEPS[step];
   const isFirst = step === 0;
   const isLast = step === STEPS.length - 1;
 
@@ -110,19 +109,23 @@ export default function ProcessStepper() {
         </button>
 
         <div className="process-step-card">
-          <span className="meta">{current.meta}</span>
-          <h3>{current.title}</h3>
-          <p>{current.body}</p>
-          {current.list && (
-            <ul className="check-list">
-              {current.list.map((item) => (
-                <li key={item}>
-                  <CheckIcon />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+          {STEPS.map((s, i) => (
+            <div className={`process-step-panel ${i === step ? "active" : ""}`} key={s.title}>
+              <span className="meta">{s.meta}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              {s.list && (
+                <ul className="check-list">
+                  {s.list.map((item) => (
+                    <li key={item}>
+                      <CheckIcon />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
         </div>
 
         <button

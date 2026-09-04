@@ -28,8 +28,15 @@
   --max-width: 1120px;
 }
 
+/* Preflight is off (see app/tailwind.css), so nothing else gives elements
+   the border-style a plain <div> needs before border-width/border-color
+   utilities render anything — without this, every Tailwind `.border` card
+   on the site is invisible (0px effective width) even though border-width
+   and border-color are both set correctly. */
 * {
   box-sizing: border-box;
+  border-style: solid;
+  border-width: 0;
 }
 
 html {
@@ -1191,12 +1198,19 @@ a {
   color: var(--accent);
 }
 .process-step-card {
+  display: grid;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 32px;
   box-shadow: var(--shadow-card);
-  min-height: 220px;
+}
+.process-step-panel {
+  grid-area: 1 / 1;
+  visibility: hidden;
+}
+.process-step-panel.active {
+  visibility: visible;
 }
 .process-step-card .meta {
   font-family: var(--font-mono);
@@ -1412,12 +1426,40 @@ a {
   white-space: nowrap;
   display: inline-block;
 }
+.report-doc-tabs-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 32px 0;
+  border-bottom: 1px solid var(--line);
+}
 .report-doc-tabs {
   display: flex;
   gap: 4px;
-  padding: 14px 32px 0;
-  border-bottom: 1px solid var(--line);
+  flex: 1;
   overflow-x: auto;
+  scrollbar-width: none;
+}
+.report-doc-tabs::-webkit-scrollbar {
+  display: none;
+}
+.report-doc-tab-arrow {
+  display: none;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-muted);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.report-doc-tab-arrow:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
 }
 .report-doc-tab {
   font-family: var(--font-mono);
@@ -2136,7 +2178,7 @@ a {
     padding: 24px 12px;
   }
   .report-doc-letterhead,
-  .report-doc-tabs,
+  .report-doc-tabs-row,
   .report-doc-body,
   .report-doc-footer {
     padding-left: 18px;
@@ -2194,5 +2236,8 @@ a {
     flex-basis: 100%;
     margin: 4px 0 0 52px;
     width: fit-content;
+  }
+  .report-doc-tab-arrow {
+    display: flex;
   }
 }

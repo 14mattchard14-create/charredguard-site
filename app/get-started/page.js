@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import BookCallWidget from "../../components/BookCallWidget";
@@ -39,10 +39,10 @@ function whyText(tier) {
     : "Recommended for you — no renovations planned, so Essential covers what matters most right now.";
 }
 
-// Loose "street, city, state [zip]" shape — enough to catch a name typed
-// into the wrong box or a half-finished address, without needing a geocoding
-// API this repo doesn't have keys for.
-const ADDRESS_PATTERN = /^\d+\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+)*,\s*[A-Za-z\s]+,\s*[A-Za-z]{2}(\s+\d{5}(-\d{4})?)?$/;
+// Fallback for anyone who types instead of picking a Google suggestion —
+// loose "street, city, state [zip]" shape, enough to catch a name typed
+// into the wrong box or a half-finished address.
+const ADDRESS_PATTERN = /^\d+\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+)*,\s*[A-Za-z\s]+,\s*[A-Za-z]{2}(\s+\d{5}(-\d{4})?)?(,\s*USA)?$/;
 
 function isValidAddress(value) {
   return ADDRESS_PATTERN.test(value.trim());
@@ -60,6 +60,9 @@ export default function GetStarted() {
   const [step, setStep] = useState(0);
   const [address, setAddress] = useState("");
   const [addressTouched, setAddressTouched] = useState(false);
+  const [addressSuggestions, setAddressSuggestions] = useState([]);
+  const [addressConfirmed, setAddressConfirmed] = useState(false);
+  const addressDebounceRef = useRef(null);
   const [goals, setGoals] = useState({});
   const [tier, setTier] = useState(null);
   const [recommendedTier, setRecommendedTier] = useState(null);
@@ -79,6 +82,33 @@ export default function GetStarted() {
   // confirmation flow, independent of this form) — we only need to know
   // whether the person chose to book or explicitly skipped it.
   const consultReady = consultChoice === "skipped" || consultChoice === "booked";
+
+  async function fetchAddressSuggestions(value) {
+    if (value.trim().length < 4) {
+      setAddressSuggestions([]);
+      return;
+    }
+    try {
+      const res = await fetch(`/api/autocomplete?input=${encodeURIComponent(value)}`);
+      const data = await res.json();
+      setAddressSuggestions(data.suggestions || []);
+    } catch {
+      setAddressSuggestions([]);
+    }
+  }
+
+  function handleAddressChange(value) {
+    setAddress(value);
+    setAddressConfirmed(false);
+    clearTimeout(addressDebounceRef.current);
+    addressDebounceRef.current = setTimeout(() => fetchAddressSuggestions(value), 300);
+  }
+
+  function selectAddressSuggestion(suggestion) {
+    setAddress(suggestion);
+    setAddressConfirmed(true);
+    setAddressSuggestions([]);
+  }
 
   function handleGoalsContinue() {
     const rec = computeTier(goals);
@@ -153,18 +183,36 @@ export default function GetStarted() {
               We&rsquo;ll use this to confirm your Fire Hazard Severity Zone and scope your
               assessment.
             </p>
-            <div className="flex flex-col gap-1.5">
+            <div className="relative flex flex-col gap-1.5">
               <label htmlFor="address" className="text-sm font-semibold text-ink-900">Property address</label>
               <input
                 id="address"
                 type="text"
-                placeholder="123 Main St, Fallbrook, CA"
+                autoComplete="off"
+                placeholder="Start typing your address…"
                 value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                onBlur={() => setAddressTouched(true)}
+                onChange={(e) => handleAddressChange(e.target.value)}
+                onBlur={() => {
+                  setAddressTouched(true);
+                  setTimeout(() => setAddressSuggestions([]), 150);
+                }}
                 className={inputClass}
               />
-              {addressTouched && address.trim() && !isValidAddress(address) && (
+              {addressSuggestions.length > 0 && (
+                <div className="absolute inset-x-0 top-full z-10 mt-[70px] overflow-hidden rounded-lg border border-surface-line bg-white shadow-md">
+                  {addressSuggestions.map((s) => (
+                    <button
+                      type="button"
+                      key={s}
+                      onMouseDown={() => selectAddressSuggestion(s)}
+                      className="block w-full border-b border-surface-line px-3.5 py-2.5 text-left text-sm text-ink-900 last:border-b-0 hover:bg-surface-muted"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {addressTouched && address.trim() && !addressConfirmed && !isValidAddress(address) && (
                 <p className="text-sm text-red-600">
                   Enter a full address with street, city, and state, like 123 Main St, Fallbrook, CA
                 </p>
@@ -172,10 +220,10 @@ export default function GetStarted() {
             </div>
             <div className="mt-5 text-right">
               <Button
-                disabled={!isValidAddress(address)}
+                disabled={!(addressConfirmed || isValidAddress(address))}
                 onClick={() => {
                   setAddressTouched(true);
-                  if (isValidAddress(address)) setStep(1);
+                  if (addressConfirmed || isValidAddress(address)) setStep(1);
                 }}
               >
                 Continue

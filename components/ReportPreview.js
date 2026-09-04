@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FINDINGS = [
   {
@@ -75,11 +75,40 @@ function MarkIcon({ priority }) {
   );
 }
 
+function TabArrow({ direction, onClick }) {
+  return (
+    <button
+      type="button"
+      className={`report-doc-tab-arrow ${direction}`}
+      onClick={onClick}
+      aria-label={direction === "left" ? "Scroll tabs left" : "Scroll tabs right"}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path
+          d={direction === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
 export default function ReportPreview() {
   const [tab, setTab] = useState("all");
   const [openId, setOpenId] = useState(FINDINGS[0].id);
+  const tabScrollRef = useRef(null);
 
   const visible = tab === "all" ? FINDINGS : FINDINGS.filter((f) => f.priority === tab);
+
+  useEffect(() => {
+    const el = tabScrollRef.current?.querySelector(`[data-tab-key="${tab}"]`);
+    el?.scrollIntoView({ behavior: "instant", inline: "center", block: "nearest" });
+  }, [tab]);
+
+  function scrollTabs(dir) {
+    tabScrollRef.current?.scrollBy({ left: dir * 120, behavior: "instant" });
+  }
 
   return (
     <div className="report-doc-wrap">
@@ -95,21 +124,26 @@ export default function ReportPreview() {
           </div>
         </div>
 
-        <div className="report-doc-tabs">
-          {TABS.map((t) => {
-            const count =
-              t.key === "all" ? FINDINGS.length : FINDINGS.filter((f) => f.priority === t.key).length;
-            return (
-              <button
-                type="button"
-                key={t.key}
-                className={`report-doc-tab ${tab === t.key ? "active" : ""}`}
-                onClick={() => setTab(t.key)}
-              >
-                {t.label} ({count})
-              </button>
-            );
-          })}
+        <div className="report-doc-tabs-row">
+          <TabArrow direction="left" onClick={() => scrollTabs(-1)} />
+          <div className="report-doc-tabs" ref={tabScrollRef}>
+            {TABS.map((t) => {
+              const count =
+                t.key === "all" ? FINDINGS.length : FINDINGS.filter((f) => f.priority === t.key).length;
+              return (
+                <button
+                  type="button"
+                  key={t.key}
+                  data-tab-key={t.key}
+                  className={`report-doc-tab ${tab === t.key ? "active" : ""}`}
+                  onClick={() => setTab(t.key)}
+                >
+                  {t.label} ({count})
+                </button>
+              );
+            })}
+          </div>
+          <TabArrow direction="right" onClick={() => scrollTabs(1)} />
         </div>
 
         <div className="report-doc-body">
