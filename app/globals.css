@@ -1457,9 +1457,13 @@ a {
   cursor: pointer;
   margin-bottom: 8px;
 }
-.report-doc-tab-arrow:hover {
+.report-doc-tab-arrow:hover:not(:disabled) {
   border-color: var(--accent);
   color: var(--accent-dark);
+}
+.report-doc-tab-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 .report-doc-tab {
   font-family: var(--font-mono);

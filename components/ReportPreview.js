@@ -75,13 +75,14 @@ function MarkIcon({ priority }) {
   );
 }
 
-function TabArrow({ direction, onClick }) {
+function TabArrow({ direction, onClick, disabled }) {
   return (
     <button
       type="button"
       className={`report-doc-tab-arrow ${direction}`}
       onClick={onClick}
-      aria-label={direction === "left" ? "Scroll tabs left" : "Scroll tabs right"}
+      disabled={disabled}
+      aria-label={direction === "left" ? "Previous filter" : "Next filter"}
     >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
         <path
@@ -100,6 +101,7 @@ export default function ReportPreview() {
   const tabScrollRef = useRef(null);
 
   const visible = tab === "all" ? FINDINGS : FINDINGS.filter((f) => f.priority === tab);
+  const tabIndex = TABS.findIndex((t) => t.key === tab);
 
   // Sets scrollLeft directly rather than el.scrollIntoView() — scrollIntoView's
   // block:'nearest' still scrolls ancestor containers (including the page
@@ -115,8 +117,10 @@ export default function ReportPreview() {
     container.scrollLeft = Math.max(0, target);
   }, [tab]);
 
-  function scrollTabs(dir) {
-    tabScrollRef.current?.scrollBy({ left: dir * 120, behavior: "instant" });
+  function stepTab(dir) {
+    const idx = TABS.findIndex((t) => t.key === tab);
+    const next = TABS[Math.min(TABS.length - 1, Math.max(0, idx + dir))];
+    setTab(next.key);
   }
 
   return (
@@ -134,7 +138,7 @@ export default function ReportPreview() {
         </div>
 
         <div className="report-doc-tabs-row">
-          <TabArrow direction="left" onClick={() => scrollTabs(-1)} />
+          <TabArrow direction="left" onClick={() => stepTab(-1)} disabled={tabIndex === 0} />
           <div className="report-doc-tabs" ref={tabScrollRef}>
             {TABS.map((t) => {
               const count =
@@ -152,7 +156,7 @@ export default function ReportPreview() {
               );
             })}
           </div>
-          <TabArrow direction="right" onClick={() => scrollTabs(1)} />
+          <TabArrow direction="right" onClick={() => stepTab(1)} disabled={tabIndex === TABS.length - 1} />
         </div>
 
         <div className="report-doc-body">
