@@ -2235,11 +2235,18 @@ a {
   .report-doc-row-head .info {
     min-width: 0;
   }
+  /* Forces the tag onto its own line without stretching the tag itself
+     full-width: flex-basis:100% on a generated "breaker" item pushes
+     everything after it to a new line, while the tag keeps its own
+     content-sized box instead of inheriting that 100% basis. */
+  .report-doc-row-head::after {
+    content: "";
+    flex-basis: 100%;
+    order: 2;
+  }
   .report-doc-tag {
     order: 3;
-    flex-basis: 100%;
     margin: 4px 0 0 52px;
-    width: fit-content;
   }
   .report-doc-tab-arrow {
     display: flex;

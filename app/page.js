@@ -6,14 +6,6 @@ import ProcessStepper from "../components/ProcessStepper";
 import { Button } from "../components/ui/button";
 import FadeIn from "../components/FadeIn";
 
-function HeroCheckIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 const faqs = [
   {
     q: "Is this the same as getting Wildfire Prepared Home certified?",
@@ -86,26 +78,6 @@ export default function Home() {
               >
                 <Link href="/services">See what we check</Link>
               </Button>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium text-white/70">
-              <span className="inline-flex items-center gap-2">
-                <span className="text-emerald-400">
-                  <HeroCheckIcon />
-                </span>
-                Free 15-minute consultation
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="text-emerald-400">
-                  <HeroCheckIcon />
-                </span>
-                Flat-fee pricing
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="text-emerald-400">
-                  <HeroCheckIcon />
-                </span>
-                Scoped to WPH criteria
-              </span>
             </div>
           </div>
         </div>
